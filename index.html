@@ -18,28 +18,65 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
 </head>
 
 <body>
+    <div class="container game-menu">
+        <form>
+            <div class="form-group logo text-center">
+                <img src="img/logo.png" class="rounded" alt="Breakout" />
+            </div>
+            <div class="form-group menu-options">
+                <div class="user-info">
+                    <label for="usernamePlayer">Username</label>
+                    <input type="text" aria-label="Username" class="form-control" id="usernamePlayer"
+                        placeholder="Player1">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group container-game-mode">
+                    <div class="form-group">
+                        <h5>Choose the game mode</h5>
+                    </div>
 
-    <div class="container">
-        <div id="intro">
-            <div>
-                <h1 style="text-align: center">Selecciona el mode de lloc</h1>
+                    <div id="nomal-mode" class="form-group col-md-4 game-mode">
+                        <h6>Normal</h6>
+
+                        <div class="game-mode-img text-center">
+                            <img src="img/logo.png" class="rounded" alt="Breakout" />
+                        </div>
+
+                        <span>El modo de juego clásico que a todo el mundo encanta. La experiencia clasica de uno de los
+                            grandes clásicos del mundo del videojuego.</span>
+
+                    </div>
+                    <div id="multiplayer-mode" class="form-group col-md-4 game-mode">
+                        <h6>Multiplayer</h6>
+
+                        <div class="game-mode-img text-center">
+                            <img src="img/logo.png" class="rounded" alt="Breakout" />
+                        </div>
+
+                        <span>Juega con un amigo en el modo multijugador para aumentar tus posibilidades de pasar de
+                            nivel... o bien reduce su capacidad de pasarlo.</span>
+
+                    </div>
+                    <div id="dual-mirror" class="form-group col-md-4 game-mode">
+                        <h6>Dual mirror</h6>
+
+                        <div class="game-mode-img text-center">
+                            <img src="img/logo.png" class="rounded" alt="Breakout" />
+                        </div>
+
+                        <span>Juega en el modo de juego dual mirror y disfruta de la experiencia de tener la pala
+                            dividida en dos mitades que se comportan como un espejo. Mitad de pala, doble
+                            dificultad.</span>
+
+                    </div>
+                </div>
             </div>
-            <div>
-                <button style="font-size: large" id="normal">Normal</button><label
-                    style="font-size: x-large; margin-right: 100px"> Mode de joc classic amb una raqueta gran</label>
-                <button style="font-size: large" id="multiplayer">Multiplayer</button><label
-                    style="margin-right: 100px; font-size: x-large"> Mode de joc en el que cada jugador controla una
-                    raqueta</label>
-                <button style="font-size: large" id="dual">Dual Mirror</button>
-                <label style="font-size: x-large"> Mode de joc amb una raqueta doble creuada</label>
-            </div>
-        </div>
+        </form>
     </div>
-
 </body>
 
 </html>
