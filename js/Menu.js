@@ -11,6 +11,5 @@ function select(obj){
 }
 
 function play(){
-
-    window.location.href = "../game.html";
+    window.location.href = "./game.html";
 }
