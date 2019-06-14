@@ -2,7 +2,6 @@
  * Created by spries on 02/06/2016.
  */
 
-
 var game;
 
 $(document).ready(function () {

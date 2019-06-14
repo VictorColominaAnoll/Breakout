@@ -1,8 +1,10 @@
 //  Game Object 
-function Game(){
+var mode = "1";
 
-    this.AMPLADA_TOTXO= 50; this.ALÇADA_TOTXO=25; // MIDES DEL TOTXO EN PÃXELS
-    this.canvas,  this.context;       // context per poder dibuixar en el Canvas
+function Game() {
+
+    this.AMPLADA_TOTXO = 50; this.ALÇADA_TOTXO = 25; // MIDES DEL TOTXO EN PÃXELS
+    this.canvas, this.context;       // context per poder dibuixar en el Canvas
     this.width, this.height;          // mides del canvas
 
     this.paddle;   // la raqueta
@@ -11,11 +13,11 @@ function Game(){
 
     this.willFrame = true;
 
-    if(mode == "3")
-        this.reversPaddle; // Mode en el que la raqueta va al contrari
-
-    if(mode == "2")
+    if (mode == "2")
         this.superiorPaddle; // Mode en el que la raqueta va al contrari
+
+    if (mode == "3")
+        this.reversPaddle; // Mode en el que la raqueta va al contrari
 
     this.vida = 4;
 
@@ -31,39 +33,39 @@ function Game(){
 
     this.power = [];
 
-    this.t=0;      // el temps
+    this.t = 0;      // el temps
 
     // Events del teclat
-    this.key={
-        RIGHT:{code: 39, pressed:false},
-        LEFT :{code: 37, pressed:false},
-        A:{code: 65, pressed: false},
-        D:{code: 68, pressed: false},
-        SPACE:{code: 32, pressed: false}
+    this.key = {
+        RIGHT: { code: 39, pressed: false },
+        LEFT: { code: 37, pressed: false },
+        A: { code: 65, pressed: false },
+        D: { code: 68, pressed: false },
+        SPACE: { code: 32, pressed: false }
     };
 
 }
 
-Game.prototype.inicialitzar = function(){
+Game.prototype.inicialitzar = function () {
+
     this.t = 0;
 
     this.canvas = document.getElementById("game");
-    this.width = this.AMPLADA_TOTXO*19;  // 15 totxos com a mÃ xim d'amplada
+    this.width = this.AMPLADA_TOTXO * 19;  // 15 totxos com a mÃ xim d'amplada
     this.canvas.width = this.width;
-    this.height = this.ALÇADA_TOTXO*25;
-    this.canvas.height =this.height;
+    this.height = this.ALÇADA_TOTXO * 25;
+    this.canvas.height = this.height;
     this.context = this.canvas.getContext("2d");
-    
+
     this.paddle = new Paddle();
 
-    if(mode == "3")
-        this.reversPaddle = new reversPaddle();
-
-    if(mode == "2")
+    if (mode == "2")
         this.superiorPaddle = new superiorPaddle();
 
+    if (mode == "3")
+        this.reversPaddle = new reversPaddle();
 
-    for(var i = 0; i<this.numeroBall; i++) {
+    for (var i = 0; i < this.numeroBall; i++) {
         this.ball.push(new Ball());
     }
 
@@ -72,35 +74,31 @@ Game.prototype.inicialitzar = function(){
     var variableX = 75;
     var variableY = 0;
 
-        for(var j = 0; j<this.NIVELLS[this.nivellActual].totxos.length; j++) {
+    for (var j = 0; j < this.NIVELLS[this.nivellActual].totxos.length; j++) {
 
-            var string = this.NIVELLS[this.nivellActual].totxos[j];
+        var string = this.NIVELLS[this.nivellActual].totxos[j];
 
-            for (var k = 0; k < string.length; k++) {
+        for (var k = 0; k < string.length; k++) {
 
-                var lletra = string.charAt(k);
-                if (lletra != " ") {
-                    this.totxo = new Totxo(variableX, variableY, 50, 25, this.NIVELLS[this.nivellActual].colors[lletra]);
-                    this.lol.push(this.totxo);
-                }
-
-                variableX = variableX + 50;
+            var lletra = string.charAt(k);
+            if (lletra != " ") {
+                this.totxo = new Totxo(variableX, variableY, 50, 25, this.NIVELLS[this.nivellActual].colors[lletra]);
+                this.lol.push(this.totxo);
             }
-            variableX = 75;
-            variableY = variableY + 25
+
+            variableX = variableX + 50;
         }
+
+        variableX = 75;
+        variableY = variableY + 25
+    }
 
     var vegades = Math.round(Utilitats.nombreAleatoriEntre(1, 5));
 
-    for(var i = 0; i < vegades; i++){
-
+    for (var i = 0; i < vegades; i++) {
         var numeroTotxo; // Aleatoriament seleccionem un totxo del qual sortira un power
-
         numeroTotxo = Math.round(Utilitats.nombreAleatoriEntre(0, this.lol.length - 1));
-
-
         this.lolPower.push(this.lol[numeroTotxo])
-
     }
 
     document.getElementById("menu").addEventListener("click", function () {
@@ -118,57 +116,56 @@ Game.prototype.inicialitzar = function(){
     });
 
     // Events amb jQuery
-    $(document).on("keydown", {game:this},function(e) {
-        if(e.keyCode==e.data.game.key.RIGHT.code){
+    $(document).on("keydown", { game: this }, function (e) {
+        if (e.keyCode == e.data.game.key.RIGHT.code) {
             e.data.game.key.RIGHT.pressed = true;
         }
-        else if(e.keyCode==e.data.game.key.LEFT.code){
+        else if (e.keyCode == e.data.game.key.LEFT.code) {
             e.data.game.key.LEFT.pressed = true;
         }
-        else if(e.keyCode==e.data.game.key.A.code){
+        else if (e.keyCode == e.data.game.key.A.code) {
             e.data.game.key.A.pressed = true;
         }
-        else if(e.keyCode==e.data.game.key.D.code){
+        else if (e.keyCode == e.data.game.key.D.code) {
             e.data.game.key.D.pressed = true;
         }
-        else if(e.keyCode==e.data.game.key.SPACE.code){
+        else if (e.keyCode == e.data.game.key.SPACE.code) {
             e.data.game.key.SPACE.pressed = true;
         }
     });
-    $(document).on("keyup", {game:this},function(e) {
-        if(e.keyCode==e.data.game.key.RIGHT.code){
+    $(document).on("keyup", { game: this }, function (e) {
+        if (e.keyCode == e.data.game.key.RIGHT.code) {
             e.data.game.key.RIGHT.pressed = false;
             e.data.game.key.RIGHT.pressed = false;
         }
-        else if(e.keyCode==e.data.game.key.LEFT.code){
+        else if (e.keyCode == e.data.game.key.LEFT.code) {
             e.data.game.key.LEFT.pressed = false;
         }
-        else if(e.keyCode==e.data.game.key.A.code){
+        else if (e.keyCode == e.data.game.key.A.code) {
             e.data.game.key.A.pressed = false;
         }
-        else if(e.keyCode==e.data.game.key.D.code){
+        else if (e.keyCode == e.data.game.key.D.code) {
             e.data.game.key.D.pressed = false;
         }
-        else if(e.keyCode==e.data.game.key.SPACE.code){
+        else if (e.keyCode == e.data.game.key.SPACE.code) {
             e.data.game.key.SPACE.pressed = false;
         }
     });
 
-    this.t=new Date().getTime();     // inicialitzem el temps
+    this.t = new Date().getTime();     // inicialitzem el temps
 
-    if(this.willFrame)
+    if (this.willFrame)
         requestAnimationFrame(mainLoop);
-
     else
         this.willFrame = true;
 
 }
 
-Game.prototype.draw = function(){
+Game.prototype.draw = function () {
 
     var pelota;
 
-    if(game.lol.length == 0) {
+    if (game.lol.length == 0) {
         this.nivellActual++;
         delete game;
         delete this.paddle;
@@ -183,19 +180,19 @@ Game.prototype.draw = function(){
 
     this.context.clearRect(0, 0, this.width, this.height);
 
-    for(var k = 0; k < this.lol.length; k++)
+    for (var k = 0; k < this.lol.length; k++)
         this.lol[k].draw(this.context);
 
     this.paddle.draw(this.context);
 
 
-    for(var i = 0; i<this.numeroBall; i++) {
+    for (var i = 0; i < this.numeroBall; i++) {
         this.ball[i].draw(this.context);
     }
-    for(var i = 0; i<this.numeroBall; i++) {
+    for (var i = 0; i < this.numeroBall; i++) {
         if (this.reinici) {
             pelota = this.ball[i];
-            pelota.x = this.paddle.x + (this.paddle.width/2);
+            pelota.x = this.paddle.x + (this.paddle.width / 2);
             pelota.y = this.paddle.y - 10;
         }
 
@@ -204,70 +201,69 @@ Game.prototype.draw = function(){
         }
     }
 
-    for (var i = 0; i<this.power.length; i++) {
+    for (var i = 0; i < this.power.length; i++) {
         if (this.power.length != 0) {
             this.power[i].draw(this.context);
         }
     }
 
-    if(mode == "3")
+    if (mode == "2")
+        this.superiorPaddle.draw(this.context);
+
+    if (mode == "3")
         this.reversPaddle.draw(this.context);
 
-    if(mode == "2")
-        this.superiorPaddle.draw(this.context);
 };
 
-Game.prototype.update = function(){
-    var dt=Math.min((new Date().getTime() -this.t)/1000, 1); // temps, en segons, que ha passat des del darrer update
-    this.t=new Date().getTime();
+Game.prototype.update = function () {
+    var dt = Math.min((new Date().getTime() - this.t) / 1000, 1); // temps, en segons, que ha passat des del darrer update
+    this.t = new Date().getTime();
 
-    if(this.vida > 3){
+    if (this.vida > 3) {
         $("#numeroVides").css("display", "inline");
         $("#numeroVides").text("x" + this.vida)
         $("#vida2").css("display", "none");
         $("#vida3").css("display", "none");
 
     }
-    else if(this.vida == 1){
+    else if (this.vida == 1) {
         $("#numeroVides").css("display", "none");
         $("#vida2").css("display", "none");
         $("#vida3").css("display", "none");
     }
-    else if(this.vida == 2){
+    else if (this.vida == 2) {
         $("#numeroVides").css("display", "none");
         $("#vida2").css("display", "inline");
         $("#vida3").css("display", "none");
     }
-    else if(this.vida == 3){
+    else if (this.vida == 3) {
         $("#numeroVides").css("display", "none");
         $("#vida2").css("display", "inline");
         $("#vida3").css("display", "inline");
     }
-    else if(this.vida== 0){
+    else if (this.vida == 0) {
         $("#numeroVides").css("display", "none");
         $("#vida1").css("display", "none");
         $("#vida2").css("display", "none");
         $("#vida3").css("display", "none");
     }
 
-
-
     this.paddle.update();    // Moviment de la raqueta
 
-    for(var i = 0; i<this.numeroBall; i++) {
+    for (var i = 0; i < this.numeroBall; i++) {
         this.ball[i].update(dt);    // moviment de la bola, depen del temps que ha passat
     }
 
-    for (var i = 0; i<this.power.length; i++) {
+    for (var i = 0; i < this.power.length; i++) {
         if (this.power.length != 0) {
             this.power[i].update(dt);
         }
     }
 
-    if(mode == "2")
+    if (mode == "2")
         this.superiorPaddle.update(); // Moviment de la raqueta mirall
 
-    if(mode == "3")
+    if (mode == "3")
         this.reversPaddle.update(); // Moviment de la raqueta mirall
 };
 

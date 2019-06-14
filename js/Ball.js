@@ -1,4 +1,7 @@
 function Ball() {
+
+    console.log(game)
+
     this.x = game.paddle.x + game.paddle.width / 2; this.y = game.paddle.y - 10;
     this.vx = -300; this.vy = -310;  // velocitat = 300 pÃ­xels per segon, cal evitar els 45 graus en el check!!
     this.radi = 10;                 // radi de la pilota
